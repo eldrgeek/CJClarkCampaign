@@ -36,8 +36,10 @@ import "@/styles/global.css";
         <div class="opacity-70">Built for speed • Deployed on Netlify</div>
       </div>
     </footer>
-    <script>
-      window.__BUILD_TIME__ = {process.env.BUILD_TIME};
+    <script define:vars={{ buildTime: import.meta.env.BUILD_TIME }}>
+      if (typeof window !== 'undefined') {
+        window.__BUILD_TIME__ = buildTime;
+      }
     </script>
   </body>
 </html>
