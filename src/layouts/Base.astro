@@ -1,0 +1,43 @@
+---
+const { title = "CJ Clarke for City Council", description = "A Healthier, Safer Sheridan" } = Astro.props;
+import "@/styles/global.css";
+---
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="icon" href="/favicon.svg" />
+  </head>
+  <body class="min-h-screen bg-gray-50 text-gray-900">
+    <header class="bg-white border-b">
+      <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <a href="/" class="font-bold text-xl text-primary-700">CJ Clarke</a>
+        <nav class="flex gap-4 text-sm">
+          <a href="/meet" class="hover:underline">Meet Chris</a>
+          <a href="/issues" class="hover:underline">Issues</a>
+          <a href="/news" class="hover:underline">News</a>
+          <a href="/get-involved" class="hover:underline">Get Involved</a>
+          <a href="/donate" class="btn">Donate</a>
+          <a href="/es" class="btn-outline">ES</a>
+        </nav>
+      </div>
+    </header>
+    <main class="max-w-6xl mx-auto px-4 py-8">
+      <slot />
+    </main>
+    <footer class="mt-16 border-t">
+      <div class="max-w-6xl mx-auto px-4 py-8 text-sm flex flex-col md:flex-row gap-2 md:items-center md:justify-between">
+        <div>© {new Date().getFullYear()} CJ Clarke for City Council</div>
+        <div class="opacity-70">Built for speed • Deployed on Netlify</div>
+      </div>
+    </footer>
+    <script>
+      window.__BUILD_TIME__ = {process.env.BUILD_TIME};
+    </script>
+  </body>
+</html>

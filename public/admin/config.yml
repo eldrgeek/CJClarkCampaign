@@ -1,0 +1,57 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+publish_mode: editorial_workflow
+
+collections:
+  - name: "pages"
+    label: "Pages"
+    files:
+      - file: "src/content/pages/home.md"
+        label: "Home"
+        name: "home"
+        fields:
+          - {label: "Hero Title", name: "heroTitle", widget: "string"}
+          - {label: "Hero Subtitle", name: "heroSubtitle", widget: "text"}
+          - {label: "Primary CTA Label", name: "primaryCta", widget: "string"}
+          - {label: "Secondary CTA Label", name: "secondaryCta", widget: "string", required: false}
+          - {label: "Feature Bullets", name: "bullets", widget: "list", field: {label: "Bullet", name: "bullet", widget: "string"}}
+          - {label: "Hero Image", name: "heroImage", widget: "image", required: false}
+      - file: "src/content/pages/meet.md"
+        label: "Meet Chris"
+        name: "meet"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Body", name: "body", widget: "markdown"}
+      - file: "src/content/pages/spanish-landing.md"
+        label: "Spanish Landing"
+        name: "spanish"
+        fields:
+          - {label: "Hero Title (ES)", name: "heroTitle", widget: "string"}
+          - {label: "Hero Subtitle (ES)", name: "heroSubtitle", widget: "text"}
+          - {label: "CTA Label (ES)", name: "ctaLabel", widget: "string"}
+
+  - name: "issues"
+    label: "Issues"
+    folder: "src/content/issues"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Priority", name: "priority", widget: "number", min: 1, max: 10, required: false}
+      - {label: "Summary", name: "summary", widget: "text"}
+      - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "news"
+    label: "News / Updates"
+    folder: "src/content/news"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Body", name: "body", widget: "markdown"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}

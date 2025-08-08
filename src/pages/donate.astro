@@ -1,0 +1,35 @@
+---
+import Base from "@/layouts/Base.astro";
+---
+<Base title="Donate" description="Chip in to help us reach more voters.">
+  <h1 class="text-3xl font-bold mb-4">Donate</h1>
+  <p class="text-gray-700 max-w-2xl">Your contribution powers field outreach, literature, and community events. Thank you!</p>
+
+  <form id="donate-form" class="card max-w-md grid gap-3">
+    <label class="grid gap-1">Amount (USD)
+      <input id="amount" type="number" min="1" step="1" value="25" class="border rounded p-2" required />
+    </label>
+    <button class="btn" type="submit">Continue to Stripe</button>
+    <p class="text-xs text-gray-500">Disclaimer: Contributions may be subject to local limits and reporting. Add your legal text here.</p>
+  </form>
+
+  <script>
+    const form = document.getElementById('donate-form');
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const amountInput = document.getElementById('amount');
+      const cents = Math.round(Number(amountInput.value) * 100);
+      const res = await fetch('/.netlify/functions/create-checkout-session', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ amount: cents })
+      });
+      const data = await res.json();
+      if (data?.url) {
+        window.location.href = data.url;
+      } else {
+        alert(data?.error || 'Error creating checkout session');
+      }
+    });
+  </script>
+</Base>

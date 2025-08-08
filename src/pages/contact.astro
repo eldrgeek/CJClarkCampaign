@@ -1,0 +1,14 @@
+---
+import Base from "@/layouts/Base.astro";
+---
+<Base title="Contact" description="Reach the campaign">
+  <h1 class="text-3xl font-bold mb-6">Contact</h1>
+  <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="card grid gap-4 max-w-xl">
+    <input type="hidden" name="form-name" value="contact" />
+    <p class="hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+    <label class="grid gap-1">Name<input class="border rounded p-2" name="name" required /></label>
+    <label class="grid gap-1">Email<input class="border rounded p-2" type="email" name="email" required /></label>
+    <label class="grid gap-1">Message<textarea class="border rounded p-2" name="message" rows="4"></textarea></label>
+    <button class="btn w-max">Send</button>
+  </form>
+</Base>

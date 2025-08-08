@@ -1,0 +1,22 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getEntry } from 'astro:content';
+const home = await getEntry('pages', 'home');
+const data = home?.data || {};
+---
+<Base title="CJ Clarke for City Council" description="A Healthier, Safer Sheridan">
+  <section class="grid md:grid-cols-2 gap-8 items-center">
+    <div>
+      <h1 class="text-4xl md:text-5xl font-extrabold text-primary-700">{data.heroTitle}</h1>
+      <p class="mt-4 text-lg text-gray-700">{data.heroSubtitle}</p>
+      <div class="mt-6 flex gap-3">
+        <a href="/donate" class="btn">{data.primaryCta || 'Donate'}</a>
+        <a href="/get-involved" class="btn-outline">{data.secondaryCta || 'Volunteer'}</a>
+      </div>
+      <ul class="mt-8 grid gap-2">
+        {(data.bullets || []).map((b) => (<li class="card" set:html={b}></li>))}
+      </ul>
+    </div>
+    <img src={data.heroImage || '/favicon.svg'} alt="Campaign" class="w-full max-w-md justify-self-center" />
+  </section>
+</Base>

@@ -1,0 +1,17 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getCollection } from 'astro:content';
+const issues = await getCollection('issues');
+const sorted = issues.sort((a,b) => (a.data.priority||99) - (b.data.priority||99));
+---
+<Base title="Issues" description="Clear priorities for Sheridan">
+  <h1 class="text-3xl font-bold mb-6">Issues</h1>
+  <div class="grid md:grid-cols-2 gap-6">
+    {sorted.map(i => (
+      <a href={"/issues/" + i.slug} class="card hover:shadow-md transition">
+        <h2 class="text-xl font-semibold">{i.data.title}</h2>
+        {i.data.summary && <p class="mt-2 text-gray-700">{i.data.summary}</p>}
+      </a>
+    ))}
+  </div>
+</Base>

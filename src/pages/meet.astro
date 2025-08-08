@@ -1,0 +1,11 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getEntry } from 'astro:content';
+const meet = await getEntry('pages','meet');
+---
+<Base title="Meet Chris" description="Small‑business owner, mentor, neighbor.">
+  <article class="prose max-w-none">
+    <h1>{meet?.data?.title || 'Meet Chris'}</h1>
+    <div set:html={meet?.body}></div>
+  </article>
+</Base>

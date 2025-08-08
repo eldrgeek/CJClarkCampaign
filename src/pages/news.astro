@@ -1,0 +1,17 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getCollection } from 'astro:content';
+const posts = (await getCollection('news')).sort((a,b)=> (b.data.date||'').localeCompare(a.data.date||''));
+---
+<Base title="News & Updates" description="Campaign updates and press.">
+  <h1 class="text-3xl font-bold mb-6">News & Updates</h1>
+  <div class="grid gap-4">
+    {posts.length === 0 && <p>No posts yet.</p>}
+    {posts.map(p => (
+      <a href={"/news/" + p.slug} class="card hover:shadow-md transition">
+        <h2 class="text-xl font-semibold">{p.data.title}</h2>
+        {p.data.date && <p class="text-sm text-gray-500 mt-1">{p.data.date}</p>}
+      </a>
+    ))}
+  </div>
+</Base>

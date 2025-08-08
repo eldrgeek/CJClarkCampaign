@@ -1,0 +1,19 @@
+---
+import Base from "@/layouts/Base.astro";
+import { getEntry } from 'astro:content';
+const es = await getEntry('pages','spanish-landing');
+const data = es?.data || {};
+---
+<Base title="CJ Clarke • Español" description="Un Sheridan más saludable y seguro">
+  <section class="grid md:grid-cols-2 gap-8 items-center">
+    <div>
+      <h1 class="text-4xl md:text-5xl font-extrabold text-primary-700">{data.heroTitle}</h1>
+      <p class="mt-4 text-lg text-gray-700">{data.heroSubtitle}</p>
+      <div class="mt-6 flex gap-3">
+        <a href="/donate" class="btn">{data.ctaLabel || 'Donar'}</a>
+        <a href="/get-involved" class="btn-outline">Ser voluntario</a>
+      </div>
+    </div>
+    <img src="/favicon.svg" alt="Campaña" class="w-full max-w-md justify-self-center" />
+  </section>
+</Base>
