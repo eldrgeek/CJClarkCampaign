@@ -1,8 +1,8 @@
 ---
-const { title = "CJ Clarke for City Council", description = "A Healthier, Safer Sheridan" } = Astro.props;
+const { title = "CJ Clarke for City Council", description = "A Healthier, Safer Sheridan", lang = "en" } = Astro.props;
 import "@/styles/global.css";
 ---
-<html lang="en" class="h-full">
+<html lang={lang} class="h-full">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -18,12 +18,13 @@ import "@/styles/global.css";
       <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
         <a href="/" class="font-bold text-xl text-primary-700">CJ Clarke</a>
         <nav class="flex gap-4 text-sm">
+          <a href="/" class="hover:underline">Home</a>
           <a href="/meet" class="hover:underline">Meet Chris</a>
           <a href="/issues" class="hover:underline">Issues</a>
           <a href="/news" class="hover:underline">News</a>
           <a href="/get-involved" class="hover:underline">Get Involved</a>
-          <a href="/donate" class="btn">Donate</a>
-          <a href="/es" class="btn-outline">ES</a>
+          <a href="/donate" class="btn" role="button">Donate</a>
+          <a href="/es" class="btn-outline">Español</a>
         </nav>
       </div>
     </header>
@@ -33,7 +34,7 @@ import "@/styles/global.css";
     <footer class="mt-16 border-t">
       <div class="max-w-6xl mx-auto px-4 py-8 text-sm flex flex-col md:flex-row gap-2 md:items-center md:justify-between">
         <div>© {new Date().getFullYear()} CJ Clarke for City Council</div>
-        <div class="opacity-70">Built for speed • Deployed on Netlify</div>
+        <div class="opacity-70">Paid for by CJ Clarke for City Council • Built for speed • Deployed on Netlify</div>
       </div>
     </footer>
     <script define:vars={{ buildTime: import.meta.env.BUILD_TIME }}>
