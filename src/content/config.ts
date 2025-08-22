@@ -30,4 +30,9 @@ const news = defineCollection({
   })
 });
 
-export const collections = { pages, issues, news };
+// Alternate-site collections (same schema). When PUBLIC_SITE_ID=alt we will read from these.
+const pages_alt = pages;
+const issues_alt = issues;
+const news_alt = news;
+
+export const collections = { pages, issues, news, pages_alt, issues_alt, news_alt };

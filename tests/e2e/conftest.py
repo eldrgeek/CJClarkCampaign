@@ -14,9 +14,11 @@ def astro_server():
     env = os.environ.copy()
     env["BROWSER"] = "none"
 
-    build = subprocess.run(["npm", "run", "build"], cwd=os.getcwd(), env=env)
-    if build.returncode != 0:
-        pytest.exit("Astro build failed; cannot run tests")
+    # Build only if no prior build exists
+    if not os.path.exists(os.path.join(os.getcwd(), "dist", "index.html")):
+        build = subprocess.run(["npm", "run", "build"], cwd=os.getcwd(), env=env)
+        if build.returncode != 0:
+            pytest.exit("Astro build failed; cannot run tests")
 
     proc = subprocess.Popen(
         ["npm", "run", "preview", "--", "--port", ASTRO_PORT],

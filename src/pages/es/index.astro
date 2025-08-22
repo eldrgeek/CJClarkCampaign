@@ -1,3 +1,4 @@
+---
 import Base from "@/layouts/Base.astro";
 import { getEntry } from 'astro:content';
 const es = await getEntry('pages','spanish-landing');
@@ -12,11 +13,6 @@ const data = es?.data || {};
         <a href="/donate" class="btn">{data.ctaLabel || 'Donar'}</a>
         <a href="/get-involved" class="btn-outline">Ser voluntario</a>
       </div>
-      {Array.isArray(data.bullets) && data.bullets.length > 0 && (
-        <ul class="mt-8 grid gap-2">
-          {data.bullets.map((b) => (<li class="card" set:html={b}></li>))}
-        </ul>
-      )}
     </div>
     <img src="/favicon.svg" alt="Campaña" class="w-full max-w-md justify-self-center" />
   </section>

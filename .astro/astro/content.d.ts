@@ -156,12 +156,28 @@ declare module 'astro:content' {
   data: InferEntrySchema<"issues">
 } & { render(): Render[".md"] };
 };
+"issues_alt": Record<string, {
+  id: string;
+  slug: string;
+  body: string;
+  collection: "issues_alt";
+  data: InferEntrySchema<"issues_alt">;
+  render(): Render[".md"];
+}>;
 "news": Record<string, {
   id: string;
   slug: string;
   body: string;
   collection: "news";
   data: InferEntrySchema<"news">;
+  render(): Render[".md"];
+}>;
+"news_alt": Record<string, {
+  id: string;
+  slug: string;
+  body: string;
+  collection: "news_alt";
+  data: InferEntrySchema<"news_alt">;
   render(): Render[".md"];
 }>;
 "pages": {
@@ -187,6 +203,14 @@ declare module 'astro:content' {
   data: InferEntrySchema<"pages">
 } & { render(): Render[".md"] };
 };
+"pages_alt": Record<string, {
+  id: string;
+  slug: string;
+  body: string;
+  collection: "pages_alt";
+  data: InferEntrySchema<"pages_alt">;
+  render(): Render[".md"];
+}>;
 
 	};
 
