@@ -2,10 +2,102 @@
 import Base from "@/layouts/Base.astro";
 import { getEntry } from 'astro:content';
 const meet = await getEntry('pages','meet');
+const data = meet?.data || {};
 ---
-<Base title="Meet Chris" description="Small‑business owner, mentor, neighbor.">
-  <article class="prose max-w-none">
-    <h1>{meet?.data?.title || 'Meet Chris'}</h1>
-    <div set:html={meet?.body}></div>
-  </article>
+<Base title="Meet Chris Clark" description="World Champion. Father. Business Owner. Community Leader.">
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-primary-700 to-primary-600 text-white -mx-4 px-4 py-16 mb-16">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-4xl md:text-6xl font-extrabold mb-6">{data.title || 'Meet Chris Clark'}</h1>
+      <p class="text-xl md:text-2xl text-primary-100 mb-8">{data.subtitle}</p>
+      {data.quote && (
+        <blockquote class="text-xl md:text-2xl italic text-accent-200 border-l-4 border-accent-400 pl-6 mx-auto max-w-3xl">
+          "{data.quote}"
+        </blockquote>
+      )}
+    </div>
+  </section>
+
+  <!-- Portrait & Bio Section -->
+  <section class="grid md:grid-cols-2 gap-12 items-start mb-16">
+    <div class="space-y-8">
+      <!-- Portrait placeholder -->
+      <div class="bg-gradient-to-br from-gray-100 to-gray-200 rounded-3xl p-12 text-center">
+        <div class="w-48 h-48 bg-primary-200 rounded-full mx-auto flex items-center justify-center text-primary-700 text-6xl font-bold">
+          CC
+        </div>
+        <p class="mt-4 text-gray-600 italic">Professional portrait coming soon</p>
+      </div>
+      
+      <!-- Quick Stats -->
+      <div class="bg-white rounded-3xl shadow-lg p-8 border border-gray-100">
+        <h3 class="text-2xl font-bold text-gray-900 mb-6 text-center">At a Glance</h3>
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">👨‍👩‍👧‍👦</span>
+            <span class="text-gray-700">Father of 6, Grandfather of 13 (+1)</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">🥋</span>
+            <span class="text-gray-700">World Champion Martial Artist</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">🏢</span>
+            <span class="text-gray-700">Owner, Chi Life Movement</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">🎯</span>
+            <span class="text-gray-700">Youth Mentor & Community Builder</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="space-y-8">
+      <article class="prose prose-lg max-w-none prose-primary">
+        <div set:html={meet?.body}></div>
+      </article>
+      
+      <!-- Call to Action -->
+      <div class="bg-primary-50 rounded-3xl p-8 border border-primary-100">
+        <h3 class="text-2xl font-bold text-primary-900 mb-4">Ready to Support Chris?</h3>
+        <p class="text-primary-700 mb-6">Join our campaign and help bring fresh leadership to Sheridan City Council.</p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="/donate" class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-2xl font-bold transition-all text-center">
+            Donate Today
+          </a>
+          <a href="/get-involved" class="border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white px-6 py-3 rounded-2xl font-bold transition-all text-center">
+            Volunteer
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Family Gallery Placeholder -->
+  <section class="mb-16">
+    <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">Family & Community</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-gray-100 rounded-3xl aspect-square flex items-center justify-center text-gray-500 text-center p-8">
+        <div>
+          <div class="text-4xl mb-2">👨‍👩‍👧‍👦</div>
+          <p>Chris with family</p>
+        </div>
+      </div>
+      <div class="bg-gray-100 rounded-3xl aspect-square flex items-center justify-center text-gray-500 text-center p-8">
+        <div>
+          <div class="text-4xl mb-2">🥋</div>
+          <p>Teaching youth martial arts</p>
+        </div>
+      </div>
+      <div class="bg-gray-100 rounded-3xl aspect-square flex items-center justify-center text-gray-500 text-center p-8">
+        <div>
+          <div class="text-4xl mb-2">🏘️</div>
+          <p>Community events</p>
+        </div>
+      </div>
+    </div>
+    <p class="text-center text-gray-600 mt-8 italic">Photo gallery coming soon</p>
+  </section>
 </Base>

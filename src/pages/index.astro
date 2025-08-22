@@ -4,19 +4,110 @@ import { getEntry } from 'astro:content';
 const home = await getEntry('pages', 'home');
 const data = home?.data || {};
 ---
-<Base title="CJ Clarke for City Council" description="A Healthier, Safer Sheridan">
-  <section class="grid md:grid-cols-2 gap-8 items-center">
-    <div>
-      <h1 class="text-4xl md:text-5xl font-extrabold text-primary-700">{data.heroTitle}</h1>
-      <p class="mt-4 text-lg text-gray-700">{data.heroSubtitle}</p>
-      <div class="mt-6 flex gap-3">
-        <a href="/donate" class="btn">{data.primaryCta || 'Donate'}</a>
-        <a href="/get-involved" class="btn-outline">{data.secondaryCta || 'Volunteer'}</a>
+<Base title="Chris Clark for City Council" description="Fresh Leadership. Safer Streets. A Stronger Sheridan.">
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-primary-700 via-primary-600 to-primary-500 text-white -mx-4 px-4 py-16 md:py-24 mb-16">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+          <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
+            {data.heroTitle}
+          </h1>
+          <p class="text-xl md:text-2xl text-primary-100 leading-relaxed">
+            {data.heroSubtitle}
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 pt-4">
+            <a href="/donate" class="bg-accent-500 hover:bg-yellow-500 text-white px-8 py-4 rounded-3xl font-bold text-lg transition-all transform hover:scale-105 shadow-lg">
+              {data.primaryCta || 'Donate Now'}
+            </a>
+            <a href="/get-involved" class="border-2 border-white text-white hover:bg-white hover:text-primary-700 px-8 py-4 rounded-3xl font-bold text-lg transition-all">
+              {data.secondaryCta || 'Volunteer'}
+            </a>
+            <a href="/meet" class="text-primary-100 hover:text-white underline px-4 py-4 font-medium text-lg">
+              {data.meetChrisCta || 'Meet Chris'} →
+            </a>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="bg-white/10 backdrop-blur-sm rounded-3xl p-8 shadow-2xl">
+            <img src={data.heroImage || '/favicon.svg'} alt="Chris Clark" class="w-full max-w-md mx-auto rounded-2xl shadow-lg" />
+          </div>
+        </div>
       </div>
-      <ul class="mt-8 grid gap-2">
-        {(data.bullets || []).map((b) => (<li class="card" set:html={b}></li>))}
-      </ul>
     </div>
-    <img src={data.heroImage || '/favicon.svg'} alt="Campaign" class="w-full max-w-md justify-self-center" />
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-10 left-10 w-32 h-32 bg-accent-500 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-20 right-20 w-40 h-40 bg-white rounded-full blur-3xl"></div>
+    </div>
+  </section>
+
+  <!-- Campaign Pillars -->
+  <section class="mb-16">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Chris's Priorities for Sheridan</h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">Four key areas where Chris will deliver immediate impact for our community</p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {(data.pillars || []).map((pillar) => (
+        <a href={pillar.link} class="group hover:scale-105 transition-all duration-300">
+          <div class="bg-white rounded-3xl shadow-lg hover:shadow-2xl p-8 text-center border border-gray-100 h-full">
+            <div class="text-5xl mb-4">{pillar.icon}</div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600">{pillar.title}</h3>
+            <p class="text-gray-600 leading-relaxed">{pillar.description}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Featured Project -->
+  <section class="mb-16 bg-gradient-to-r from-gray-50 to-primary-50 -mx-4 px-4 py-16 rounded-3xl">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Riverwalk Revitalization Vision</h2>
+      <p class="text-xl text-gray-700 mb-8 leading-relaxed">
+        Chris envisions transforming Sheridan's Riverwalk into a vibrant community space that brings families together, 
+        supports local businesses, and showcases our city's natural beauty.
+      </p>
+      <a href="/issues" class="inline-flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-3xl font-bold text-lg transition-all">
+        Learn More About the Vision 
+        <span class="text-xl">→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  {data.testimonials && data.testimonials.length > 0 && (
+    <section class="mb-16">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What Sheridan Says</h2>
+        <p class="text-xl text-gray-600">Hear from community members supporting Chris's vision</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        {data.testimonials.map((testimonial) => (
+          <div class="bg-white rounded-3xl shadow-lg p-8 border border-gray-100">
+            <div class="text-primary-600 text-4xl mb-4">"</div>
+            <p class="text-lg text-gray-700 italic mb-6 leading-relaxed">{testimonial.quote}</p>
+            <div class="text-primary-600 font-semibold">— {testimonial.author}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+  )}
+
+  <!-- Call to Action -->
+  <section class="bg-primary-700 text-white -mx-4 px-4 py-16 rounded-3xl text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Build a Stronger Sheridan?</h2>
+    <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+      Join Chris's campaign today. Every donation, every volunteer hour, and every vote brings us closer to the change Sheridan needs.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="/donate" class="bg-accent-500 hover:bg-yellow-500 text-white px-8 py-4 rounded-3xl font-bold text-lg transition-all transform hover:scale-105">
+        Donate Now
+      </a>
+      <a href="/get-involved" class="border-2 border-white text-white hover:bg-white hover:text-primary-700 px-8 py-4 rounded-3xl font-bold text-lg transition-all">
+        Get Involved
+      </a>
+    </div>
   </section>
 </Base>
